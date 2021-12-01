@@ -18,8 +18,10 @@
 //#import "TZLocationManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "TZImageRequestOperation.h"
+#import "PhotoPickerNavView.h"
+#import "PhotoPickerAlbumListTCell.h"
 
-@interface TZPhotoPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, PHPhotoLibraryChangeObserver> {
+@interface TZPhotoPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, PHPhotoLibraryChangeObserver, UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray *_models;
     
     UIView *_bottomToolBar;
@@ -35,6 +37,8 @@
     BOOL _showTakePhotoBtn;
     
     CGFloat _offsetItemCount;
+    
+    UIButton *_cancelBtn;
 }
 @property CGRect previousPreheatRect;
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;
@@ -46,12 +50,17 @@
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
 @property (nonatomic, assign) BOOL isSavingMedia;
 @property (nonatomic, assign) BOOL isFetchingMedia;
+
+@property (nonatomic, strong) PhotoPickerNavView *navView;
+@property (nonatomic, strong) TZAlbumModel *selectedAlbum;
+@property (nonatomic, strong) UITableView *albumListV;
 @end
 
 static CGSize AssetGridThumbnailSize;
 static CGFloat itemMargin = 5;
 
 @implementation TZPhotoPickerController
+
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -99,9 +108,13 @@ static CGFloat itemMargin = 5;
         tzImagePickerVc.navLeftBarButtonSettingBlock(leftButton);
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     } else if (tzImagePickerVc.childViewControllers.count) {
-        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:[NSBundle tz_localizedStringForKey:@"Back"] style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBarButtonClick)];
+        // FIXME: 修改了这里
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:[NSBundle tz_localizedStringForKey:@"Backsssss2"] style:UIBarButtonItemStylePlain target:self action:@selector(navLeftBarButtonClick)];
         [TZCommonTools configBarButtonItem:backItem tzImagePickerVc:tzImagePickerVc];
         [tzImagePickerVc.childViewControllers firstObject].navigationItem.backBarButtonItem = backItem;
+        
+        [self.navigationController setNavigationBarHidden:YES];
+        
     }
     _showTakePhotoBtn = _model.isCameraRoll && ((tzImagePickerVc.allowTakePicture && tzImagePickerVc.allowPickingImage) || (tzImagePickerVc.allowTakeVideo && tzImagePickerVc.allowPickingVideo));
     // [self resetCachedAssets];
@@ -134,6 +147,11 @@ static CGFloat itemMargin = 5;
             [self initSubviews];
         }
     });
+    
+    dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC);
+    dispatch_after(timer, dispatch_get_main_queue(), ^{
+        [self setUpAfterLayout];
+    });
 }
 
 - (void)initSubviews {
@@ -143,6 +161,8 @@ static CGFloat itemMargin = 5;
         
         [self checkSelectedModels];
         [self configCollectionView];
+        [self configAlbumListV];
+        [self configNaviView];
         self->_collectionView.hidden = YES;
         [self configBottomToolBar];
         
@@ -167,7 +187,75 @@ static CGFloat itemMargin = 5;
     }
     return [super preferredStatusBarStyle];
 }
+- (UITableView *)albumListV {
+    if (_albumListV == nil) {
+        _albumListV = [[UITableView alloc] initWithFrame:CGRectZero];
+        [self.view addSubview:_albumListV];
+    }
+    return _albumListV;
+}
+- (PhotoPickerNavView *)navView {
+    if (_navView == nil) {
+        _navView = (PhotoPickerNavView *)[[NSBundle mainBundle] loadNibNamed:@"PhotoPickerNavView" owner:nil options:nil].firstObject;
+        [self.view addSubview:_navView];
+    }
+    return _navView;
+}
+- (void)configAlbumListV {
+    self.albumListV.delegate = self;
+    self.albumListV.dataSource = self;
+    self.albumListV.backgroundColor = UIColor.darkGrayColor;
+    NSBundle *currentBundle = [NSBundle bundleForClass:[self class]];
+    [self.albumListV registerNib:[UINib nibWithNibName:@"PhotoPickerAlbumListTCell" bundle:currentBundle] forCellReuseIdentifier:@"PhotoPickerAlbumListTCell"];
+}
 
+- (void)showAlbumListV {
+    
+//    self.albumListV.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+//        self.albumListV.alpha = 1;
+        self.albumListV.transform = CGAffineTransformMakeTranslation(0, self.collectionView.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)hideAlumListV {
+//    self.albumListV.alpha = 1;
+    [UIView animateWithDuration:0.5 animations:^{
+//        self.albumListV.alpha = 0;
+        self.albumListV.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return  10;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PhotoPickerAlbumListTCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PhotoPickerAlbumListTCell"];
+    return cell;
+}
+
+- (void)configNaviView {
+    
+    __weak typeof(self) weakSelf = self;
+    self.navView.cancelClicked = ^(){
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    };
+    self.navView.titleClicked = ^(BOOL isUp){
+        
+        if (isUp == NO) { // 正常状态下点击
+            [weakSelf.navView setTitle:@"IS UP" direction:YES];
+            [weakSelf showAlbumListV];
+        } else {
+            [weakSelf.navView setTitle:@"IS DOWN" direction:NO];
+            [weakSelf hideAlumListV];
+        }
+//            self.selectedAlbum;
+    };
+}
 - (void)configCollectionView {
     if (!_collectionView) {
         _layout = [[UICollectionViewFlowLayout alloc] init];
@@ -348,7 +436,9 @@ static CGFloat itemMargin = 5;
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
+}
+
+- (void)setUpAfterLayout {
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     
     CGFloat top = 0;
@@ -356,6 +446,8 @@ static CGFloat itemMargin = 5;
     CGFloat naviBarHeight = self.navigationController.navigationBar.tz_height;
     BOOL isStatusBarHidden = [UIApplication sharedApplication].isStatusBarHidden;
     BOOL isFullScreen = self.view.tz_height == [UIScreen mainScreen].bounds.size.height;
+    
+    //
     CGFloat toolBarHeight = 50 + [TZCommonTools tz_safeAreaInsets].bottom;
     if (self.navigationController.navigationBar.isTranslucent) {
         top = naviBarHeight;
@@ -364,6 +456,10 @@ static CGFloat itemMargin = 5;
     } else {
         collectionViewHeight = tzImagePickerVc.showSelectBtn ? self.view.tz_height - toolBarHeight : self.view.tz_height;
     }
+    
+    //
+    self.navView.frame = CGRectMake(0, 0, self.view.tz_width, top);
+    
     _collectionView.frame = CGRectMake(0, top, self.view.tz_width, collectionViewHeight);
     _noDataLabel.frame = _collectionView.bounds;
     CGFloat itemWH = (self.view.tz_width - (self.columnNumber + 1) * itemMargin) / self.columnNumber;
@@ -376,12 +472,18 @@ static CGFloat itemMargin = 5;
         [_collectionView setContentOffset:CGPointMake(0, offsetY)];
     }
     
+    //
+    self.albumListV.frame = CGRectMake(_collectionView.frame.origin.x, _collectionView.frame.origin.y - _collectionView.frame.size.height, _collectionView.frame.size.width, _collectionView.frame.size.height);
+    
+    
     CGFloat toolBarTop = 0;
     if (!self.navigationController.navigationBar.isHidden) {
         toolBarTop = self.view.tz_height - toolBarHeight;
     } else {
-        CGFloat navigationHeight = naviBarHeight + [TZCommonTools tz_statusBarHeight];
-        toolBarTop = self.view.tz_height - toolBarHeight - navigationHeight;
+        // FIXME: 这里也修改了
+//        CGFloat navigationHeight = naviBarHeight + [TZCommonTools tz_statusBarHeight];
+//        toolBarTop = self.view.tz_height - toolBarHeight - navigationHeight;
+        toolBarTop = self.view.tz_height - toolBarHeight;
     }
     _bottomToolBar.frame = CGRectMake(0, toolBarTop, self.view.tz_width, toolBarHeight);
     
@@ -409,6 +511,10 @@ static CGFloat itemMargin = 5;
     if (tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock) {
         tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock(_collectionView, _bottomToolBar, _previewButton, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel, _divideLine);
     }
+    
+    //
+    [self.view bringSubviewToFront:self.albumListV];
+    [self.view bringSubviewToFront:self.navView];
 }
 
 #pragma mark - Notification

@@ -505,6 +505,7 @@
     }
 }
 
+// 拍照使用的啊啊
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -617,6 +618,7 @@
 /// 如果isSelectOriginalPhoto为YES，表明用户选择了原图
 /// 你可以通过一个asset获得原图，通过这个方法：[[TZImageManager manager] getOriginalPhotoWithAsset:completion:]
 - (void)imagePickerController:(TZImagePickerController *)picker didSelectAsset:(PHAsset *)asset photo:(UIImage *)photo isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    NSLog(@"%s", __func__);
 //    [_selectedAssets addObject:asset];
 //    [_selectedPhotos addObject:photo];
 //    [self.collectionView reloadData];
@@ -626,6 +628,7 @@
 /// 如果isSelectOriginalPhoto为YES，表明用户选择了原图
 /// 你可以通过一个asset获得原图，通过这个方法：[[TZImageManager manager] getOriginalPhotoWithAsset:completion:]
 - (void)imagePickerController:(TZImagePickerController *)picker didDeselectAsset:(PHAsset *)asset photo:(UIImage *)photo isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    NSLog(@"%s", __func__);
 //    int index = -1;
 //    for (int i = 0; i < _selectedAssets.count; i++) {
 //        if ([_selectedAssets[i] isEqual:asset]) {

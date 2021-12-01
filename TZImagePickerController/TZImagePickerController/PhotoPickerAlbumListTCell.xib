@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PhotoPickerAlbumListTCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XBB-PS-2VK">
+                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="XBB-PS-2VK" secondAttribute="height" multiplier="1:1" id="7N1-ej-WUM"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="照片分类" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2Q-vT-gvB">
+                        <rect key="frame" x="60" y="12.5" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（1678）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1az-kM-F9L">
+                        <rect key="frame" x="129.5" y="13.5" width="61" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPF-vh-pZS">
+                        <rect key="frame" x="292" y="10" width="18" height="24"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="selection.pin.in.out" catalog="system"/>
+                        <state key="selected" image="photo_original_sel.png"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XBB-PS-2VK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="36j-f4-Oar"/>
+                    <constraint firstAttribute="trailing" secondItem="VPF-vh-pZS" secondAttribute="trailing" constant="10" id="IH6-e1-Tbn"/>
+                    <constraint firstItem="u2Q-vT-gvB" firstAttribute="centerY" secondItem="XBB-PS-2VK" secondAttribute="centerY" id="SX0-LR-r1E"/>
+                    <constraint firstItem="u2Q-vT-gvB" firstAttribute="leading" secondItem="XBB-PS-2VK" secondAttribute="trailing" constant="16" id="XK0-a1-sUh"/>
+                    <constraint firstItem="1az-kM-F9L" firstAttribute="centerY" secondItem="u2Q-vT-gvB" secondAttribute="centerY" id="aLX-2O-Ub3"/>
+                    <constraint firstItem="1az-kM-F9L" firstAttribute="leading" secondItem="u2Q-vT-gvB" secondAttribute="trailing" constant="4" id="ec1-sf-6Sb"/>
+                    <constraint firstItem="XBB-PS-2VK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="i22-EJ-rER"/>
+                    <constraint firstAttribute="bottom" secondItem="XBB-PS-2VK" secondAttribute="bottom" id="jIt-Cu-DVy"/>
+                    <constraint firstItem="VPF-vh-pZS" firstAttribute="centerY" secondItem="XBB-PS-2VK" secondAttribute="centerY" id="koW-ca-Cu3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="131.8840579710145" y="49.553571428571423"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="photo_original_sel.png" width="20" height="21"/>
+        <image name="selection.pin.in.out" catalog="system" width="96" height="128"/>
+    </resources>
+</document>

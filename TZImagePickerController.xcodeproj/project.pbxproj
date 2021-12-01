@@ -13,6 +13,10 @@
 		6DC358661CC8BAFD00898D29 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DC358651CC8BAFD00898D29 /* TZImagePickerController.bundle */; };
 		6DC84D0A1DF5358500A107A9 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC84D091DF5358500A107A9 /* TZImageCropManager.m */; };
 		6DD0502B1DF659ED0057C78D /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0502A1DF659ED0057C78D /* TZProgressView.m */; };
+		8B7CAF9B27578441004AD180 /* PhotoPickerNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7CAF9A27578441004AD180 /* PhotoPickerNavView.m */; };
+		8B7CAF9D27578466004AD180 /* PhotoPickerNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7CAF9C27578466004AD180 /* PhotoPickerNavView.xib */; };
+		8B7CAFA1275794DE004AD180 /* PhotoPickerAlbumListTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7CAF9F275794DE004AD180 /* PhotoPickerAlbumListTCell.m */; };
+		8B7CAFA2275794DE004AD180 /* PhotoPickerAlbumListTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7CAFA0275794DE004AD180 /* PhotoPickerAlbumListTCell.xib */; };
 		90020E1320F8840800D3AB10 /* TZImagePickerController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 90020E1220F8840800D3AB10 /* TZImagePickerController.podspec */; };
 		90020E1520F8840F00D3AB10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90020E1420F8840E00D3AB10 /* README.md */; };
 		9005E2B3257A462E002A8682 /* UIView+TZLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9005E2B1257A462E002A8682 /* UIView+TZLayout.m */; };
@@ -127,6 +131,12 @@
 		6DC84D091DF5358500A107A9 /* TZImageCropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageCropManager.m; sourceTree = "<group>"; };
 		6DD050291DF659ED0057C78D /* TZProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZProgressView.h; sourceTree = "<group>"; };
 		6DD0502A1DF659ED0057C78D /* TZProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZProgressView.m; sourceTree = "<group>"; };
+		8B7CAF9927578441004AD180 /* PhotoPickerNavView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPickerNavView.h; sourceTree = "<group>"; };
+		8B7CAF9A27578441004AD180 /* PhotoPickerNavView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerNavView.m; sourceTree = "<group>"; };
+		8B7CAF9C27578466004AD180 /* PhotoPickerNavView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPickerNavView.xib; sourceTree = "<group>"; };
+		8B7CAF9E275794DE004AD180 /* PhotoPickerAlbumListTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoPickerAlbumListTCell.h; sourceTree = "<group>"; };
+		8B7CAF9F275794DE004AD180 /* PhotoPickerAlbumListTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerAlbumListTCell.m; sourceTree = "<group>"; };
+		8B7CAFA0275794DE004AD180 /* PhotoPickerAlbumListTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoPickerAlbumListTCell.xib; sourceTree = "<group>"; };
 		90020E1220F8840800D3AB10 /* TZImagePickerController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TZImagePickerController.podspec; sourceTree = SOURCE_ROOT; };
 		90020E1420F8840E00D3AB10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		9005E2B1257A462E002A8682 /* UIView+TZLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TZLayout.m"; sourceTree = "<group>"; };
@@ -311,6 +321,12 @@
 				900EEFF71C2BBF9500EA709B /* TZImagePickerController.m */,
 				900EEFFC1C2BD58B00EA709B /* TZPhotoPickerController.h */,
 				900EEFFD1C2BD58B00EA709B /* TZPhotoPickerController.m */,
+				8B7CAF9927578441004AD180 /* PhotoPickerNavView.h */,
+				8B7CAF9A27578441004AD180 /* PhotoPickerNavView.m */,
+				8B7CAF9C27578466004AD180 /* PhotoPickerNavView.xib */,
+				8B7CAF9E275794DE004AD180 /* PhotoPickerAlbumListTCell.h */,
+				8B7CAF9F275794DE004AD180 /* PhotoPickerAlbumListTCell.m */,
+				8B7CAFA0275794DE004AD180 /* PhotoPickerAlbumListTCell.xib */,
 				900EEFFF1C2BD7E400EA709B /* TZAssetCell.h */,
 				900EF0001C2BD7E400EA709B /* TZAssetCell.m */,
 				900EF00D1C2C0B1100EA709B /* TZAssetModel.h */,
@@ -491,8 +507,9 @@
 				TargetAttributes = {
 					900E657B1C2BB8D5003D9A9E = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = LTFQDC2QVX;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 23869FAP88;
+						LastSwiftMigration = 1310;
+						ProvisioningStyle = Manual;
 					};
 					900E65941C2BB8D5003D9A9E = {
 						CreatedOnToolsVersion = 7.2;
@@ -541,10 +558,12 @@
 				90020E1320F8840800D3AB10 /* TZImagePickerController.podspec in Resources */,
 				90A74B85203287C200D84C2A /* Localizable.strings in Resources */,
 				900E658F1C2BB8D5003D9A9E /* LaunchScreen.storyboard in Resources */,
+				8B7CAFA2275794DE004AD180 /* PhotoPickerAlbumListTCell.xib in Resources */,
 				90020E1520F8840F00D3AB10 /* README.md in Resources */,
 				6DC358661CC8BAFD00898D29 /* TZImagePickerController.bundle in Resources */,
 				900E658C1C2BB8D5003D9A9E /* Assets.xcassets in Resources */,
 				900E658A1C2BB8D5003D9A9E /* Main.storyboard in Resources */,
+				8B7CAF9D27578466004AD180 /* PhotoPickerNavView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,7 +611,9 @@
 				901F2295215CABD600F604ED /* FLAnimatedImage.m in Sources */,
 				900E65841C2BB8D5003D9A9E /* AppDelegate.m in Sources */,
 				9005E2B3257A462E002A8682 /* UIView+TZLayout.m in Sources */,
+				8B7CAF9B27578441004AD180 /* PhotoPickerNavView.m in Sources */,
 				B606A9C4265FD53200F5493E /* TZVideoCropController.m in Sources */,
+				8B7CAFA1275794DE004AD180 /* PhotoPickerAlbumListTCell.m in Sources */,
 				901F2296215CABD600F604ED /* FLAnimatedImageView.m in Sources */,
 				9019FD8D21EC25D7009ADEAE /* TZImageUploadOperation.m in Sources */,
 				900E65811C2BB8D5003D9A9E /* main.m in Sources */,
@@ -802,10 +823,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LTFQDC2QVX;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 23869FAP88;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TZImagePickerController",
@@ -814,10 +836,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.6.7;
-				PRODUCT_BUNDLE_IDENTIFIER = tanzhenios2021.TZImagePickerController.www;
+				PRODUCT_BUNDLE_IDENTIFIER = com.txjzrx.cloudmusicstreamer0506;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS-Test-WangXing-Development";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -826,10 +850,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LTFQDC2QVX;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 23869FAP88;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TZImagePickerController",
@@ -838,10 +863,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.6.7;
-				PRODUCT_BUNDLE_IDENTIFIER = tanzhenios2021.TZImagePickerController.www;
+				PRODUCT_BUNDLE_IDENTIFIER = tanzhenios2021.com.txjzrx.cloudmusicstreamer0506;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS-Test-WangXing-Development";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
